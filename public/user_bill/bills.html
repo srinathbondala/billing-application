@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Bills</title>
+    <link rel="stylesheet" href="bills.css">
+</head>
+<body>
+    <div id="overshade">
+        <div id="loader" class="center1"></div>
+    </div>
+    <div id="overshade1">
+        <div id="disp_table">
+            <div style="width: 96%; display: flex; flex-direction: column; z-index: 11;" >
+                <button onclick="close_table()" style="align-self: flex-end;margin-right: 30px;">Close</button>
+                <table id="bills-table">
+                    <thead>
+                        <tr>
+                            <th>Bill Id</th>
+                            <th>Bill Number</th>
+                            <th>Customer ID</th>
+                            <th>Bill Date</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Payment Due Date</th>
+                            <th>Payment Method</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+                <div id="tableBody"></div>
+            </div>
+        </div>
+    </div>
+    <div id="overshade3">
+        <div style="display: flex;
+        align-items: center;
+        justify-content: center;">
+            <div id="search_By_Id">
+                <div style="display: flex; justify-content: space-between;">
+                    <h3>Search By Id</h3>
+                    <button onclick="close_search()" class="close_btn">Close</button>
+                </div>
+                <hr>
+                <input type="text" placeholder="Enter Id No" id="billId" required>
+                <button onclick="search()">Search</button>
+                <hr>
+                <div style="overflow: auto;">
+                    <div id="search_result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id ="overshade4">
+        <div style="display: flex;align-items: center;justify-content: center; height: 100%;">
+            <div class="demosty">
+                <div class="close_div">
+                    <div style="width: 55%;display: inline-flex; justify-content: end;">
+                        <h2>Update Data</h2>
+                    </div>
+                    <button onclick="cancelEdit()">close</button>
+                </div>
+                <form id="editForm">
+                    <div class="form-group">
+                        <label for="editId">Id Number:</label>
+                        <input type="text" id="editId" name="bill_number" required class="inputfield" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_bill_number">Bill Number:</label>
+                        <input type="text" id="edit_bill_number" name="bill_number" placeholder="Eg: BN001" required class="inputfield">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edit_customer_id">Customer ID:</label>
+                        <input type="number" id="edit_customer_id" name="customer_id" placeholder="Eg: 100" required class="inputfield">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edit_bill_date">Bill Date:</label>
+                        <input type="date" id="edit_bill_date" name="bill_date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edit_amount">Amount:</label>
+                        <input type="number" class="inputfield" id="edit_amount" name="amount" step="0.01" placeholder="Eg: 100000" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="status">Status:</label>
+                        <select id="edit_status" name="status" required>
+                            <option value="Paid">Paid</option>
+                            <option value="Unpaid">Unpaid</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edit_payment_due_date">Payment Due Date:</label>
+                        <input type="date" id="edit_payment_due_date" name="payment_due_date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edit_payment_method">Payment Method:</label>
+                        <select id="edit_payment_method" name="payment_method" required>
+                            <option value="Debit card">Debit card</option>
+                            <option value="Credit card">Credit card</option>
+                            <option value="Cash">Cash</option>
+                            <option value="UPI">UPI</option>
+                            <option value="Net banking">Net banking</option>
+                            <option value="Bank Transfer">Bank Transfer</option>
+                        </select>
+                    </div>
+                    <div style="width: 100%;" class="center">
+                        <button type="submit">Edit Bill</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div>
+        <header class="center">
+            <h1 style="margin-left: 10px;">User Bills</h1>
+            <div>
+                <button id="logout" style="margin-right: 10px;" onclick="logout()">Logout</button>
+            </div>
+        </header>
+        <div class="parent_div">
+            <div class="left_div">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h2>View Data</h2>
+                    <div>
+                        <button onclick="view_Table()" style="font-size: small;">View As Table</button>
+                        <button onclick="search_By_Id()"style="font-size: small;">Search By ID</button>
+                        <button onclick="view_data()" style="font-size: small;">Download</button>
+                    </div>
+                </div>
+                <hr>
+                <div id="display_data"></div>
+            </div>
+            <div class="right_div">
+                <h2>Add Data</h2><hr>
+                <div>
+                    <form id="billForm">
+                        <div class="form-group">
+                            <label for="bill_number">Bill Number:</label>
+                            <input type="text" id="bill_number" name="bill_number" placeholder="Eg: BN001" required class="inputfield">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="customer_id">Customer ID:</label>
+                            <input type="number" id="customer_id" name="customer_id" placeholder="Eg: 100" required class="inputfield">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="bill_date">Bill Date:</label>
+                            <input type="date" id="bill_date" name="bill_date" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="amount">Amount:</label>
+                            <input type="number" class="inputfield" id="amount" name="amount" step="0.01" placeholder="Eg: 100000" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="status">Status:</label>
+                            <select id="status" name="status" required>
+                                <option value="Paid">Paid</option>
+                                <option value="Unpaid">Unpaid</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="payment_due_date">Payment Due Date:</label>
+                            <input type="date" id="payment_due_date" name="payment_due_date" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="payment_method">Payment Method:</label>
+                            <select id="payment_method" name="payment_method" required>
+                                <option value="Debit card">Debit card</option>
+                                <option value="Credit card">Credit card</option>
+                                <option value="Cash">Cash</option>
+                                <option value="UPI">UPI</option>
+                                <option value="Net banking">Net banking</option>
+                                <option value="Bank Transfer">Bank Transfer</option>
+                            </select>
+                        </div>
+                        <div style="width: 100%;" class="center">
+                            <button type="submit">Add Bill</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="feature-info">
+                <h1>Features Overview</h1>
+                <div class="feature">
+                  <h2>1. Login & Logout</h2>
+                  <p>Description: Implement a login and logout feature connected to MySQL.</p>
+                  <ul>
+                    <li><strong>Login Form:</strong> A simple form with username and password fields.</li>
+                    <li><strong>Logout Button:</strong> A button to log out the user.</li>
+                  </ul>
+                </div>
+              
+                <div class="feature">
+                  <h2>2. View Data as Table and Card</h2>
+                  <p>Description: Display data in both table and card formats.</p>
+                  <ul>
+                    <li><strong>Table View:</strong> A responsive table layout.</li>
+                    <li><strong>Card View:</strong> A grid layout with cards displaying data.</li>
+                  </ul>
+                </div>
+              
+                <div class="feature">
+                  <h2>3. Search By Id</h2>
+                  <p>Description: Search for data by ID.</p>
+                  <ul>
+                    <li><strong>Search:</strong> Search data by Id.</li>
+                    <li><strong>Display Results:</strong> Show data corresponding to the ID.</li>
+                  </ul>
+                </div>
+              
+                <div class="feature">
+                  <h2>4. CRUD Operations</h2>
+                  <p>Description: Implement create, read, update, and delete operations.</p>
+                  <ul>
+                    <li><strong>Create:</strong> Form to input and submit new data.</li>
+                    <li><strong>Read:</strong> Display existing data in table or card view.</li>
+                    <li><strong>Update:</strong> Form pre-filled with data for editing.</li>
+                    <li><strong>Delete:</strong> Button to delete data, with confirmation prompt.</li>
+                  </ul>
+                </div>
+
+                <div class="feature">
+                    <h2>5. Download</h2>
+                    <p>Description: Download Complete Data As excel File.</p>
+                    <ul>
+                      <li><strong>Download:</strong> Download the data in excel format.</li>
+                    </ul>
+                  </div>
+              </div>
+        </footer>
+    </div>
+    <script src="bills.js"></script>
+</body>
+</html>

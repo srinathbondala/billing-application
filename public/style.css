@@ -1,0 +1,79 @@
+body{
+    overflow: hidden;
+}
+.center{
+    display : flex;
+    justify-content : center;
+    align-items : center;
+}
+.main_div{
+    height: 98vh;
+}
+.container{
+    background-color: aquamarine;
+    width: 50%;
+    height: 90%;
+    flex-direction: column;
+}
+#login_form{
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+}
+.container1 {
+    display: block;
+    width: 300px;
+    border: solid #D3D3D3 1px;
+    padding: 15px 24px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+.form{
+    width: 80%;
+    height: 80%;
+    background-color: white;
+}
+.inputfield{
+    width: 100%;
+    height: 30px;
+    border: solid #929292 1.33px; 
+    border-radius: 5px;
+    margin-top: 4px;
+    padding-inline-start: 8px;
+}
+.inputfield:focus{
+    outline:none;
+    box-shadow: 0 0 5px rgba(0, 255, 255, 0.7), 0 0 3px rgba(0, 128, 0, 0.5);
+}
+.hr{
+    border: none;
+    height: 0.5px;
+    background-color: #D3D3D3; 
+}
+.signin_sub{
+    display: flex;
+    flex-direction: row;
+    margin-top: 0px; 
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+a{
+    text-decoration: none;
+    color:  #0659b7;
+}
+a:hover{
+    text-decoration: underline;
+    color:lightcoral;
+}
+button,input[type="submit"]{
+    margin-top: 12px;
+    width: 104%;
+    height: 30px;
+    border: solid #D3D3D3 1px; 
+    border-radius: 8px;
+    background-color:gold;
+}
+button:hover,input[type="submit"]:hover{
+    background-color: #fbcb50;
+}
